@@ -1,0 +1,141 @@
+{
+    "version": 1,
+    "about": "The shape every Quillstack package takes, in whatever language it is written. Rules marked universal hold everywhere; the rest name the ecosystem they belong to.",
+    "readme": {
+        "scope": "universal",
+        "sections": [
+            {
+                "title": "Why this exists",
+                "required": true
+            },
+            {
+                "title": "Requirements",
+                "required": true
+            },
+            {
+                "title": "Installation",
+                "required": true,
+                "satisfiedBy": {
+                    "project": "Getting started"
+                }
+            },
+            {
+                "title": "Usage",
+                "required": true,
+                "satisfiedBy": {
+                    "project": "Getting started"
+                }
+            },
+            {
+                "title": "Benchmark",
+                "required": false
+            },
+            {
+                "title": "Tests",
+                "required": true
+            },
+            {
+                "title": "The rest of Quillstack",
+                "required": true
+            },
+            {
+                "title": "License",
+                "required": true
+            }
+        ],
+        "ordered": true,
+        "firstHeadingIsTitle": true,
+        "rendering": {
+            "noInlineBeforeLinkAcrossLineBreak": true,
+            "note": "An inline element at the end of a line with a link starting the next renders with the space between them missing: `**with**` and `[a link]` come out as `witha link`."
+        },
+        "about": ""
+    },
+    "badges": {
+        "scope": "universal",
+        "required": [
+            "tests",
+            "version",
+            "downloads",
+            "language-version",
+            "codefactor",
+            "sonar-quality-gate",
+            "sonar-coverage",
+            "sonar-maintainability",
+            "sonar-reliability",
+            "sonar-security",
+            "license"
+        ],
+        "mustRender": true,
+        "note": "A badge that 404s is worse than no badge. Each is fetched, not eyeballed. The list is what every ecosystem carries. A service which exists for one language only is named in that language's section instead: StyleCI checks PHP style and has nothing to say about Python, so it is not here."
+    },
+    "repository": {
+        "scope": "universal",
+        "descriptionMatchesManifest": true,
+        "homepage": "https://quillstack.org/packages/{name}",
+        "topics": {
+            "minimum": 5,
+            "mustInclude": [
+                "quillstack"
+            ]
+        }
+    },
+    "ci": {
+        "scope": "universal",
+        "actionsPinnedToCommit": true,
+        "versionCommentRequired": true,
+        "note": "A tag is a pointer its owner can move. The comment is what Dependabot reads, so it has to be true."
+    },
+    "documentation": {
+        "scope": "universal",
+        "generatedFromReadme": true,
+        "registeredOnSite": true,
+        "note": "The page is built from the README. There is no second copy to keep in step."
+    },
+    "quality": {
+        "scope": "universal",
+        "sonarProjectKey": "quillstack_{name}",
+        "sonarMainBranch": "main",
+        "sonarNewCodePeriodSet": true,
+        "note": "A project imported before its first analysis is created with `master` as the main branch, and without a new code period the quality gate is never computed. Both have been missed five times by hand."
+    },
+    "releasing": {
+        "scope": "universal",
+        "verifyBeforeTagging": true,
+        "tagsAreImmutable": true,
+        "minorIsBreakingInZeroX": true,
+        "newestTagIsPublished": true,
+        "registry": "https://repo.packagist.org/p2/{name}.json",
+        "note": "Tagging is not publishing: a registry hears about a tag through a webhook, and a webhook can fail. One did here and answered 500, so a release looked done \u2014 green CI, tag on GitHub \u2014 and nobody could install it. It went unnoticed long enough for the next release to be missing too."
+    },
+    "php": {
+        "scope": "php",
+        "manifest": "composer.json",
+        "requiredScripts": [
+            "test",
+            "test:coverage",
+            "stan"
+        ],
+        "branchAlias": true,
+        "files": [
+            ".github/workflows/tests.yml",
+            ".github/dependabot.yml",
+            ".gitignore",
+            ".styleci.yml",
+            "phpstan.neon",
+            "sonar-project.properties",
+            "LICENSE",
+            "README.md"
+        ],
+        "minimumVersion": "8.1",
+        "badges": [
+            "styleci"
+        ]
+    },
+    "python": {
+        "scope": "python",
+        "manifest": "pyproject.toml",
+        "note": "Filled in as the Python side is built. The universal rules above already apply to it. No style badge yet: ruff is the formatter and linter, and it runs in CI rather than as a service with a shield.",
+        "badges": []
+    }
+}

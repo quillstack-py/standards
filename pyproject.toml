@@ -1,0 +1,52 @@
+[project]
+name = "quillstack-standards"
+version = "0.1.0"
+description = "Checks a Quillstack package against the shape every one of them takes: the README, the badges, the repository, the release."
+readme = "README.md"
+license = "MIT"
+authors = [{ name = "Radek Ziemniewicz", email = "radek@quillstack.org" }]
+requires-python = ">=3.11"
+keywords = ["quillstack", "standards", "linter", "packaging", "python3"]
+dependencies = []
+
+[project.urls]
+Homepage = "https://quillstack.org/packages/standards-py"
+Source = "https://github.com/quillstack-py/standards"
+
+[project.scripts]
+quillstack-standards = "quillstack.standards.cli:main"
+
+[dependency-groups]
+dev = ["pytest>=8.0", "ruff>=0.6", "mypy>=1.11"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/quillstack"]
+
+# PEP 561: without this the types are here and nothing is allowed to believe them.
+[tool.hatch.build.targets.wheel.force-include]
+"src/quillstack/standards/py.typed" = "quillstack/standards/py.typed"
+"src/quillstack/standards/rules.json" = "quillstack/standards/rules.json"
+
+[tool.ruff]
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "UP", "B", "SIM", "RUF"]
+
+[tool.mypy]
+strict = true
+files = ["src", "tests"]
+# `quillstack` is a namespace package with no `__init__.py`, on purpose: every Quillstack
+# distribution contributes its own directory to it. Without these three, mypy goes looking for
+# the `__init__.py` that must never exist.
+mypy_path = "src"
+namespace_packages = true
+explicit_package_bases = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -1,0 +1,57 @@
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  # So a run can be asked for without pushing something to ask for it.
+  workflow_dispatch:
+
+jobs:
+  tests:
+    name: Python ${{ matrix.python }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.11', '3.12', '3.13']
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: astral-sh/setup-uv@20cfd1bf945f4377ade1205e4dbc17946fc9a30d # v10.0.1
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: Tests
+        run: uv run --frozen pytest -q
+
+  quality:
+    name: Lint and types
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: astral-sh/setup-uv@20cfd1bf945f4377ade1205e4dbc17946fc9a30d # v10.0.1
+        with:
+          python-version: '3.12'
+
+      - name: Ruff
+        run: uv run --frozen ruff check
+
+      - name: Mypy
+        run: uv run --frozen mypy
+
+  standard:
+    name: Its own standard
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: astral-sh/setup-uv@20cfd1bf945f4377ade1205e4dbc17946fc9a30d # v10.0.1
+        with:
+          python-version: '3.12'
+
+      # A checker which does not pass the standard it checks for is a poor advertisement.
+      - name: Check itself
+        run: uv run --frozen quillstack-standards .
