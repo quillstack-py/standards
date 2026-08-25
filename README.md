@@ -133,9 +133,13 @@ cannot part company quietly.
 ### Static analysis
 
 ```shell
-uv run ruff check
+uv run ruff check --no-cache
 uv run mypy
 ```
+
+`--no-cache` on purpose. A cached ruff result once said this package was clean while CI said it
+was not, which is the same trick a stale PHPStan cache played on the PHP side the same week. A
+local check that agrees with you may not have looked.
 
 ## The rest of Quillstack
 
