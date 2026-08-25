@@ -6,7 +6,8 @@ changing a rule is changing the file rather than changing a checker.
 
 from quillstack.standards.checks.badges import Badges
 from quillstack.standards.checks.check import Check
+from quillstack.standards.checks.manifest import Manifest
 from quillstack.standards.checks.readme_sections import ReadmeSections
 from quillstack.standards.checks.rendering import Rendering
 
-__all__ = ["Badges", "Check", "ReadmeSections", "Rendering"]
+__all__ = ["Badges", "Check", "Manifest", "ReadmeSections", "Rendering"]

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from quillstack.standards.checks import Badges, Check, ReadmeSections, Rendering
+from quillstack.standards.checks import Badges, Check, Manifest, ReadmeSections, Rendering
 from quillstack.standards.rules import at
 
 
@@ -29,6 +29,12 @@ class Standard:
                 bool(at("badges.mustRender", True)),
             ),
             Rendering(bool(at("readme.rendering.noInlineBeforeLinkAcrossLineBreak", True))),
+            Manifest(
+                str(at("python.homepage", "")),
+                self._strings("python.classifiers.required"),
+                str(at("python.classifiers.perVersion", "")),
+                self._strings("python.requiredFiles"),
+            ),
         ]
 
     def _sections(self) -> list[dict[str, Any]]:

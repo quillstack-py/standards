@@ -75,6 +75,7 @@ It exits `1` where anything failed, so CI can use it without reading the output.
 | `readme sections` | the sections the standard sets, present and in order |
 | `badges` | the badge block, all of it |
 | `rendering` | markdown which reads correctly and renders wrongly |
+| `manifest` | the homepage, the classifiers, and the files a distribution ships |
 
 Fewer than the PHP checker has, because this one is new. The rules for the rest are already in
 `rules.json` — what is missing is the reading of them here, and a case in `conformance` will not
